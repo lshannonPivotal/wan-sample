@@ -103,6 +103,92 @@ Cluster-2 gfsh>
 ```
 ## Make Sure Receiver and Sender are started
 
+Next start the Receiver on Cluster 2 first
+```shell
+Cluster-2 gfsh>start gateway-receiver
+                        Member                          | Result | Message
+------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------
+ip-172-31-38-94(ip-172-31-38-94_server:17176)<v1>:54376 | OK     | GatewayReceiver is started on member ip-172-31-38-94(ip-172-31-38-94_server:17176)<v1>:54376
+```
+Start the Sender on Cluster 1 second
+```shell
+Cluster-1 gfsh>start gateway-sender --id=sender
+                        Member                          | Result | Message
+------------------------------------------------------- | ------ | -------------------------------------------------------------------------------------------------
+ip-172-31-38-93(ip-172-31-38-93_server:23707)<v1>:54754 | OK     | GatewaySender sender is started on member ip-172-31-38-93(ip-172-31-38-93_server:23707)<v1>:54754
+```
+## Put Data Into Cluster 1 and then verify data in Cluster 2
+Run insertData.sh on Cluster 1 to put data into Cluster 1
+```shell
+ubuntu@ip-172-31-38-93:~/wan-sample/gemfire-package/scripts$ ./insertData.sh
+Putting Data In Cluster 1
+1. Executing - connect --locator=172.31.38.93[10334]
+
+Connecting to Locator at [host=172.31.38.93, port=10334] ..
+Connecting to Manager at [host=ip-172-31-38-93.ec2.internal, port=1099] ..
+Successfully connected to: [host=ip-172-31-38-93.ec2.internal, port=1099]
+
+2. Executing - put --region=/customers --key="1" --value="Thomas"
+
+Result      : true
+Key Class   : java.lang.String
+Key         : 1
+Value Class : java.lang.String
+Old Value   : <NULL>
+
+
+3. Executing - put --region=/customers --key="2" --value="Janet"
+
+Result      : true
+Key Class   : java.lang.String
+Key         : 2
+Value Class : java.lang.String
+Old Value   : <NULL>
+
+
+4. Executing - put --region=/customers --key="3" --value="Angela"
+
+Result      : true
+Key Class   : java.lang.String
+Key         : 3
+Value Class : java.lang.String
+Old Value   : <NULL>
+```
+The fdata can be verfied in Cluster 1
+```shell
+Cluster-1 gfsh>query --query="select * from /customers"
+
+Result     : true
+startCount : 0
+endCount   : 20
+Rows       : 1000
+
+Result
+--------
+Annie
+Annie
+Annie
+Annie
+Margaret
+Margaret
+Margaret
+Margaret
+Harry
+Harry
+Harry
+Doris
+Doris
+Doris
+Doris
+Doris
+Doris
+Doris
+Doris
+Louis
+Louis
+
+Press n to move to next page, q to quit and p to previous page : 
+```
 
 ## Stopping The Clusters
 Run the stopAWSClusters.sh script to stop Clusters
