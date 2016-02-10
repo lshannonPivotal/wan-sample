@@ -189,6 +189,43 @@ Louis
 
 Press n to move to next page, q to quit and p to previous page : 
 ```
+Finally by query the data on Cluster 2 to see the values that have been copied over by the WAN
+```shell
+Cluster-2 gfsh>query --query
+Value is required for parameter "query: The OQL string."
+gfsh>query --query="select * from /customers"
+
+Result     : true
+startCount : 0
+endCount   : 20
+Rows       : 1000
+
+Result
+--------
+Annie
+Annie
+Annie
+Annie
+Margaret
+Margaret
+Margaret
+Margaret
+Harry
+Harry
+Harry
+Doris
+Doris
+Doris
+Doris
+Doris
+Doris
+Doris
+Doris
+Louis
+Louis
+
+Press n to move to next page, q to quit and p to previous page : 
+```
 
 ## Stopping The Clusters
 Run the stopAWSClusters.sh script to stop Clusters
