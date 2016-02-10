@@ -7,7 +7,6 @@ export LOCATOR_NAME="$(hostname)_locator"
 export SERVER_NAME="$(hostname)_server"
 export WORKING_DIRECTORY=/home/ubuntu/wan-sample/gemfire-package
 export CONF_DIR=$WORKING_DIRECTORY/conf
-export LIB_DIR=$WORKING_DIRECTORY/lib
 export SERVER_DIR_LOCATION=$WORKING_DIRECTORY/members
 export IP_ADDRESS=`ifconfig eth0 2>/dev/null|awk '/inet addr:/ {print $2}'|sed 's/addr://'`
 export LOCATOR_PORT=10334
@@ -16,7 +15,7 @@ export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 export GEMFIRE=/home/ubuntu/cluster/gemfire-ubuntu-package/Pivotal_GemFire_810_b50625_Linux
 export GF_JAVA=$JAVA_HOME/bin/java
 export PATH=$PATH:$JAVA_HOME/bin:$GEMFIRE/bin
-export CLASSPATH=$CLASSPATH:$GEMFIRE/lib/*:$JAVA_HOME/lib/tools.jar:$CONF_DIR/:$CONF_DIR/*:$LIB_DIR/:$LIB_DIR/*
+export CLASSPATH=$CLASSPATH:$GEMFIRE/lib/*:$JAVA_HOME/lib/tools.jar:$CONF_DIR/:$CONF_DIR/*
 
 ##Create the member directory for the locator
 if [ ! -d "$SERVER_DIR_LOCATION/$LOCATOR_NAME" ]; then
