@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE cache PUBLIC "-//GemStone Systems, Inc.//GemFire Declarative Caching 8.0//EN" "http://www.gemstone.com/dtd/cache8_0.dtd">
+<cache>
+
+  <gateway-receiver start-port="9010" end-port="9015" hostname-for-senders="52.0.225.28" manual-start="true"/>
+
+  <cache-server port="0"/>
+
+  <region name="customers">
+    		<region-attributes refid="REPLICATE"/>
+	</region>
+
+  <resource-manager critical-heap-percentage="80" eviction-heap-percentage="60"/>
+
+</cache>

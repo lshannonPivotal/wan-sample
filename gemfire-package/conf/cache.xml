@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE cache PUBLIC "-//GemStone Systems, Inc.//GemFire Declarative Caching 8.0//EN" "http://www.gemstone.com/dtd/cache8_0.dtd">
+<cache>
+
+	<gateway-sender id="sender" parallel="false" manual-start="true" remote-distributed-system-id="2"/>
+
+	<cache-server port="0"/>
+
+	<region name="customers">
+		<region-attributes refid="REPLICATE" gateway-sender-ids="sender"/>
+	</region>
+
+	<resource-manager critical-heap-percentage="80" eviction-heap-percentage="60"/>
+
+</cache>
